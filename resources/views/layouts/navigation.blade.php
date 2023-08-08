@@ -12,7 +12,7 @@
             </div>
             <!-- Search -->
             <div class="hidden sm:flex sm:items-center">
-                {{-- <livewire:sear ch /> --}}
+                <livewire:search />
             </div>
 
 
@@ -70,7 +70,7 @@
                                         class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                         <div>
                                             <img class="w-6 h-6 -mt-1 object-cover rounded-full border border-gray-500"
-                                                 src="{{ auth()->user()->image }}">
+                                                 src="{{ asset(auth()->user()->image) }}">
                                         </div>
 
                                     </button>
@@ -97,12 +97,14 @@
             @endauth
             <!-- Hamburger -->
             <div class="-mr-2 flex md:hidden items-center">
+                @auth
                 <button class="text-[1.6rem] ltr:mr-2 rtl:ml-2 leading-5">
                     <div class="relative" onclick="Livewire.emit('openModal' , 'pending-followers-list')">
                         <i class="bx bxs-inbox"></i>
                         <livewire:pending-followers-count />
                     </div>
                 </button>
+                @endauth
                 <button @click="open = ! open"
                         class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">

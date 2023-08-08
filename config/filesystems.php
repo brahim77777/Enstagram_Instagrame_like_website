@@ -74,6 +74,9 @@ return [
         public_path('default_images') => storage_path('app/public/default_images'),
         public_path('posts') => storage_path('app/public/posts'),
         public_path('users') => storage_path('app/public/users'),
+        public_path('temp') => storage_path('app/public/temp'),
+        public_path('filters_thumb') => storage_path('app/public/filters_thumb'),
+
 
 
 

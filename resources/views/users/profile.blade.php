@@ -7,7 +7,7 @@
     <div class="grid grid-cols-4">
         {{-- User Image --}}
         <div class="px-4 col-span-1 order-1">
-            <img src="{{ $user->image }}" alt="{{ $user->username }}' profile picture"
+            <img src="{{ asset($user->image) }}" alt="{{ $user->username }}' profile picture"
                  class="rounded-full w-20 h-20 object-cover md:w-40 md:h-40 border border-neutral-300">
         </div>
 
@@ -60,36 +60,44 @@
     </div>
 
     {{-- Bottom --}}
-    @auth
-    @if ($user->posts()->count() > 0 and ($user->private_account == false or auth()->id() == $user->id or auth()->user()->is_following($user)))
-        <div class="grid grid-cols-3 gap-4 my-5">
-            @foreach ($user->posts as $post)
-                <a class="aspect-square block w-full" href="/p/{{ $post->slug }}">
-                    <div class="group relative">
-                        <img class="w-full aspect-square object-cover" src="/{{ $post->image }}">
-                        @if (auth()->id() === $post->user_id)
-                            <div
-                                class="absolute top-0 ltr:left-0 rtl:right-0 w-full h-full flex flex-row justify-center items-center group-hover:bg-black/40">
-                                <ul class="invisible group-hover:visible flex flex-row">
-                                    <li class="flex items-center text-2xl text-white font-bold ltr:mr-2 rtl:ml-2">
-                                        <i class='bx bxs-heart ltr:mr-1 rtl:ml-1'></i>
+    {{-- @auth --}}
+    @if(!(auth()->user() ==  null and $user->private_account))
+        @if ( $user->posts()->count() > 0 and ($user->private_account == false or auth()->id() == $user->id or auth()->user()->is_following($user)))
+            <div class="grid grid-cols-3 gap-4 my-5">
+                @foreach ($user->posts as $post)
+                    <a class="aspect-square block w-full" href="/p/{{ $post->slug }}">
+                        <div class="group relative">
+                            <img class="w-full aspect-square object-cover" src="{{ asset($post->image) }}">
+                                <div
+                                    class="absolute top-0 ltr:left-0 rtl:right-0 w-full h-full flex flex-row justify-center items-center group-hover:bg-black/40">
+                                    <ul class="invisible group-hover:visible flex flex-row">
+                                        <li class="flex items-center text-2xl text-white font-bold ltr:mr-2 rtl:ml-2">
+                                            <i class='bx bxs-heart ltr:mr-1 rtl:ml-1'></i>
+                                                <span>
+                                            {{ $post->likes()->count() }}
+                                                </span>
+                                        </li>
+                                        <li class="flex items-center text-2xl text-white font-bold">
+                                            <i class='bx bx-comment ltr:mr-1 rtl:ml-1'></i>
                                             <span>
-                                        {{ $post->likes()->count() }}
+                                            {{ $post->comments()->count() }}
                                             </span>
-                                    </li>
-                                    <li class="flex items-center text-2xl text-white font-bold">
-                                        <i class='bx bx-comment ltr:mr-1 rtl:ml-1'></i>
-                                        <span>
-                                        {{ $post->comments()->count() }}
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
-                    </div>
-                </a>
-            @endforeach
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        @else
+        <div class="w-full text-center mt-20">
+            @if ($user->private_account == true and $user->id != auth()->id())
+                {{ __('This Account is Private Follow to see their photos.') }}
+            @else
+                {{ __('This user does not have any post.') }}
+            @endif
         </div>
+        @endif
     @else
         <div class="w-full text-center mt-20">
             @if ($user->private_account == true and $user->id != auth()->id())
@@ -99,5 +107,4 @@
             @endif
         </div>
     @endif
-    @endauth
 </x-app-layout>

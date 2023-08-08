@@ -19,9 +19,8 @@
                     </div>
                     {{-- @if ($post->owner->id === auth()->id()) --}}
                     @if(auth()->id() === $post->owner->id)
-                        <a  href="/p/{{$post->slug}}/edit"><i class='text-xl hover:text-2xl hover:shadow hover:bg-gray-100 w-12 hover:border rounded-lg
-
-                            -xl text-center bx bxs-edit-alt'></i></a>
+                    <button onclick="Livewire.emit('openModal', 'edit-post-modal', {{ json_encode([$post->id]) }})">
+                        <i class='bx bx-message-square-edit text-xl'></i></button>
                         <form action="/p/{{ $post->slug }}" method="POST">
                             @csrf
                             @method('DELETE')

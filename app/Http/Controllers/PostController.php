@@ -102,7 +102,7 @@ class PostController extends Controller
 
         Storage::disk('public')->delete($post->image);
         $post->delete();
-        return redirect(route('dashboard'));
+        return redirect(route('user_profile' , ['user'=>auth()->user()]));
     }
     public function explore(){
         $posts= Post::whereRelation('owner'  ,'private_account' , '=','0')->whereNot('user_id' , auth()->id())->simplePaginate(9);
