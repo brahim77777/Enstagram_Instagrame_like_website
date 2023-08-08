@@ -6,9 +6,9 @@
     @endif
     <div>
     @if($this->post->likes()->count() > 0 )
-        <strong>Liked By <span class="text-sm text-sky-600">{{$this->post->likes()->first()->username }}</span> </strong>
+        <strong>{{__("Liked By")}} <span class="text-sm text-sky-600">{{$this->post->likes()->first()->username }}</span> </strong>
     @if($this->post->likes()->count() > 1)
-        <strong>and <span class="text-sm text-sky-600">{{$this->post->likes()->count()-1}}</span> others </strong>
+        <strong>{{__("and")}} <span class="text-sm text-sky-600">{{$this->post->likes()->count()-1}}</span> {{__("others")}} </strong>
     @endif
     @endif
     </div>

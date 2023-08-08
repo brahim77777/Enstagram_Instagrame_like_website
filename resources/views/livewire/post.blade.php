@@ -1,13 +1,14 @@
 <div class="card">
-    <div class="card-header gap-2">
-        <img src="{{ asset($post->owner->image) }}" class="w-8 h-8 ltr:mr-5 rtl:ml-5 rounded-full" />
+    <div class="card-header gap-1">
+        <a href="/{{$post->owner->username}}"><img src="{{ asset($post->owner->image) }}" class="w-8 h-8 ltr:mr-5 rtl:ml-5 rounded-full" /></a>
         <a href="/{{ $post->owner->username }}" class="font-bold">
             {{ $post->owner->username }}
         </a>
     </div>
     <div class="card-body">
         <div class="max-h-[35rem] overflow-hidden">
-            <img class="h-auto w-full object-cover" src="{{ asset($post->image) }}">
+            <a href="/p/{{$post->slug}}">
+                <img class="h-auto w-full object-cover" src="{{ asset($post->image) }}"></a>
         </div>
 
         <div class="p-3 flex flex-row">

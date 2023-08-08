@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-gray-900 antialiased" dir="{{app()->getLocale() == 'en' ? 'ltr' : 'rtl'}}">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/">
@@ -24,7 +24,13 @@
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
+
+            </div>                
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 text-center font-body flex justify-around text-sm font-body" dir="ltr">
+                <a href="/lang-ar">العربية</a>  
+                <a href="/lang-en">English</a>
             </div>
         </div>
+
     </body>
 </html>

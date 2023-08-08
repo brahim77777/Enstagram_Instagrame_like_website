@@ -8,14 +8,14 @@
 
     {{-- Right Side --}}
     <div class="hidden w-[60rem] lg:flex lg:flex-col pt-4">
-        <div class="flex flex-row text-sm">
+        <div class="flex flex-row text-sm gap-2">
             <div class="mr-5">
                 <a href="/{{auth()->user()->username}}">
                     <img src="{{asset(auth()->user()->image)}}" alt="{{auth()->user()->username}}" class="border border-gray-300 rounded-full h-12 w-12">
                 </a>
             </div>
-            <div class="flex col">
-                <a href="/{{auth()->user()->username}}" class="font-bold">{{auth()->user()->usename}}</a>
+            <div class="flex flex-col">
+                <a href="/{{auth()->user()->username}}" class="font-bold">{{auth()->user()->username}}</a>
                 <div class="text-gray-500 text-sm">{{auth()->user()->name}}</div>
             </div>
         </div>

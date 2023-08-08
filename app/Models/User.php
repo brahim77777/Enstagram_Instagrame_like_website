@@ -23,6 +23,7 @@ class User extends Authenticatable
         'username',
         'image',
         'email',
+        'lang',
         'password',
         'private_account',
     ];
@@ -78,12 +79,12 @@ class User extends Authenticatable
         $otherUser = User::find($user_id);
 
         if($user->following()->wherePivot('confirmed' , true )->get()->contains($otherUser)){
-            return 'unfollow';
+            return 'Unfollow';
         }
         if($user->following()->wherePivot('confirmed' , false )->get()->contains($otherUser)){
-           return 'pending';
+           return 'Pending';
         }
-        return 'follow';
+        return 'Follow';
 
         
     }
@@ -91,7 +92,7 @@ class User extends Authenticatable
         $user = User::find(auth()->id());
         $otherUser = User::find($user_id);
         if($user->followers()->wherePivot('confirmed', true)->get()->contains($otherUser)) {
-            return 'follower';
+            return 'Follower';
         }
     }
 

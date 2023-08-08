@@ -1,4 +1,5 @@
 <x-app-layout>
+
     <div
         class="{{ session('success') ? '' : 'hidden' }} w-50 p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800 absolute right-10 shadow shadow-neutral-200"
         role="alert">
@@ -107,4 +108,43 @@
             @endif
         </div>
     @endif
+    <x-slot name="scripts">
+        toastr.options =
+        {
+          "progressBar" : true
+        }
+        toastr.options.positionClass='toast-top-center'
+        @if(Session::has('Success'))
+
+
+              toastr.success("{{ session('Success') }}");
+        @endif
+      
+        @if(Session::has('error'))
+        toastr.options =
+        {
+          "closeButton" : true,
+          "progressBar" : true
+        }
+              toastr.error("{{ session('error') }}");
+        @endif
+      
+        @if(Session::has('info'))
+        toastr.options =
+        {
+          "closeButton" : true,
+          "progressBar" : true
+        }
+              toastr.info("{{ session('info') }}");
+        @endif
+      
+        @if(Session::has('warning'))
+        toastr.options =
+        {
+          "closeButton" : true,
+          "progressBar" : true
+        }
+              toastr.warning("{{ session('warning') }}");
+        @endif
+    </x-slot>
 </x-app-layout>

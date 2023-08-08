@@ -63,7 +63,7 @@
                                 </x-slot>
                             </x-dropdown>
                         </div>
-                        <div class="hidden md:block">
+                        <div class="hidden md:block" >
                             <x-dropdown align="{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}" width="48">
                                 <x-slot name="trigger">
                                     <button
@@ -76,15 +76,15 @@
                                     </button>
                                 </x-slot>
 
-                                <x-slot name="content">
-                                    <x-dropdown-link :href="route('user_profile', auth()->user())">{{ __('Profile') }}</x-dropdown-link>
+                                <x-slot name="content" class="{{app()->getLocale() == 'ar' ? 'text-right' :''}} " >
+                                    <x-dropdown-link :href="route('user_profile', auth()->user())" class="{{app()->getLocale() == 'ar' ? 'text-right' :''}} ">{{ __('Profile') }}</x-dropdown-link>
                                     <!-- Authentication -->
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
 
                                         <x-dropdown-link :href="route('logout')"
                                                          onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();" class="{{app()->getLocale() == 'ar' ? 'text-right' :''}} ">
                                             {{ __('Log Out') }}
                                         </x-dropdown-link>
                                     </form>
